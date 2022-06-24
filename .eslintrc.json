@@ -1,3 +1,8 @@
 {
-  "extends": "next/core-web-vitals"
-}
+    "extends": ["next/core-web-vitals", "@newsteam"],
+    "rules": {
+        "@typescript-eslint/no-magic-numbers":"off",
+        "id-length":"off",
+        "react/jsx-no-leaked-render": 1
+    }
+  }
