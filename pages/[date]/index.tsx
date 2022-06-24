@@ -1,5 +1,6 @@
 
 import React from "react";
+import Head from "next/head";
 
 import {
     getPicture,
@@ -15,10 +16,20 @@ import type {
 } from "next";
 
 export const PicturePage: NextPage<Picture> = ({
-    title
+    title,
+    url
 }) => (
     <div>
-        { title }
+        <Head>
+            <title>
+                { title }
+            </title>
+        </Head>
+        <h1>
+            { title }
+        </h1>
+        { /* eslint-disable-next-line @next/next/no-img-element -- no */ }
+        <img alt={ title } src={ url } />
     </div>
 );
 
