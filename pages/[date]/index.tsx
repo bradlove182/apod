@@ -37,7 +37,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
     const end = new Date();
     const start = new Date();
-    start.setDate(start.getDate() - 10);
+    start.setDate(start.getDate() - 7);
 
     const pictures = await getPictures({
         endDate: dateToString(end),

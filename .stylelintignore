@@ -2,6 +2,7 @@
 node_modules
 *.tsx
 *.ts
+*.js
 *.*
 !*.css
 !*.scss

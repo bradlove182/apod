@@ -5,9 +5,7 @@ import { snakeCase } from "change-case";
 export const get = async <RequestType extends Record<string, unknown>, ResponseType>(props: RequestType): Promise<ResponseType> => {
 
     let query = {};
-    const keys = Object.keys(props).map((key) => key);
-
-    keys.forEach((key) => {
+    Object.keys(props).map((key) => key).forEach((key) => {
         query = {
             ...query,
             [snakeCase(key)]: props[key]
