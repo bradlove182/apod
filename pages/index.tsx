@@ -1,7 +1,7 @@
 import React from "react";
 import Head from "next/head";
 
-import { getPictures } from "../data/api/picture";
+import { getPicture } from "../data/api/picture";
 import { dateToString } from "../utils/date";
 
 import type {
@@ -11,18 +11,16 @@ import type {
 import type { Picture } from "../data/api/picture/types";
 
 export interface HomePageProps{
-    today: Picture;
-    yesterday: Picture;
+    picture: Picture;
 }
 
 export const Home: NextPage<HomePageProps> = ({
-    today,
-    yesterday
+    picture
 }) => (
     <div
-        className="h-screen bg-cover bg-center grid content-end p-16"
+        className="h-100 bg-cover bg-center grid content-end p-16"
         style={ {
-            backgroundImage: `url(${ today.url })`
+            backgroundImage: `url(${ picture.url })`
         } }
     >
         <Head>
@@ -34,28 +32,8 @@ export const Home: NextPage<HomePageProps> = ({
         <div className="relative grid grid-cols-2 grid-rows-1 z-10">
             <div className="col-span-1 col-start-1 prose">
                 <h1>
-                    { today.title }
+                    { picture.title }
                 </h1>
-            </div>
-            <div className="col-span-1 col-start-2s">
-                <div className="card card-side bg-base-100 shadow-xl">
-                    <figure>
-                        <div
-                            className="h-full w-32 bg-center bg-cover"
-                            style={ {
-                                backgroundImage: `url(${ yesterday.url })`
-                            } }
-                        />
-                    </figure>
-                    <div className="card-body">
-                        <div className="card-actions justify-between items-center">
-                            <a className="btn btn-primary" href={ `/${ yesterday.date }` }>
-                                { ">" }
-                            </a>
-                        </div>
-                    </div>
-
-                </div>
             </div>
         </div>
     </div>
@@ -63,19 +41,15 @@ export const Home: NextPage<HomePageProps> = ({
 
 export const getStaticProps: GetStaticProps = async () => {
 
-    const end = new Date();
-    const start = new Date();
-    start.setDate(start.getDate() - 1);
+    const today = new Date();
 
-    const pictures = await getPictures({
-        endDate: dateToString(end),
-        startDate: dateToString(start)
+    const picture = await getPicture({
+        date: dateToString(today)
     });
 
     return {
         props: {
-            today: pictures[1],
-            yesterday: pictures[0]
+            picture
         },
         revalidate: 60
     };

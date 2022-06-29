@@ -1,5 +1,7 @@
 
-export const dateToString = (date: Date): string => date.toISOString().slice(0, 10);
+import { DateTime } from "luxon";
+
+export const dateToString = (date: Date): string => DateTime.fromJSDate(date).toString().slice(0, 10);
 
 export const currentDate = (): string => dateToString(new Date());
 

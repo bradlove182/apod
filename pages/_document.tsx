@@ -11,7 +11,7 @@ class MyDocument extends Document{
 
     render(): React.ReactElement{
         return (
-            <Html data-theme="night" lang="en">
+            <Html data-theme="dracula" lang="en">
                 <Head />
                 <body>
                     <Main />
