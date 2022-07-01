@@ -1,7 +1,8 @@
 
 import { DateTime } from "luxon";
 
-export const dateToString = (date: Date): string => DateTime.fromJSDate(date).toString().slice(0, 10);
+export const dateToString = (date: Date): string => DateTime.fromJSDate(date).toUTC().toString()
+.slice(0, 10);
 
 export const currentDate = (): string => dateToString(new Date());
 

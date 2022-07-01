@@ -1,12 +1,16 @@
 
-import React from "react";
+import React, { useEffect } from "react";
 import Head from "next/head";
+import { useRouter } from "next/router";
+import { DateTime } from "luxon";
 
 import {
     getPicture,
     getPictures
 } from "../../data/api/picture";
 import { dateToString } from "../../utils/date";
+import { PictureOfTheDay } from "../../components/picture";
+import useStore from "../../store";
 
 import type { Picture } from "../../data/api/picture/types";
 import type {
@@ -15,29 +19,55 @@ import type {
     NextPage
 } from "next";
 
-export const PicturePage: NextPage<Picture> = ({
-    title,
-    url
-}) => (
-    <div>
-        <Head>
-            <title>
-                { title }
-            </title>
-        </Head>
-        <h1>
-            { title }
-        </h1>
-        { /* eslint-disable-next-line @next/next/no-img-element -- no */ }
-        <img alt={ title } src={ url } />
-    </div>
-);
+interface PicturePageProps{
+    picture: Picture;
+}
+
+export const PicturePage: NextPage<PicturePageProps> = ({
+    picture
+}) => {
+
+    const router = useRouter();
+
+    const setDate = useStore((state) => state.setDate);
+
+    useEffect(() => {
+
+        if(!router.isFallback){
+
+            setDate(DateTime.fromISO(picture.date).toJSDate());
+
+        }
+
+
+    }, [router.isFallback]);
+
+    if(router.isFallback){
+        return (
+            <div>
+                { "Loading" }
+            </div>
+        );
+    }
+
+    return (
+        <React.Fragment>
+            <Head>
+                <title>
+                    { picture.title }
+                </title>
+            </Head>
+            <PictureOfTheDay picture={ picture } />
+        </React.Fragment>
+    );
+
+};
 
 export const getStaticPaths: GetStaticPaths = async () => {
 
     const end = new Date();
     const start = new Date();
-    start.setDate(start.getDate() - 7);
+    start.setDate(end.getDate() - 7);
 
     const pictures = await getPictures({
         endDate: dateToString(end),
@@ -54,12 +84,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
         fallback: true,
         paths
     };
-
 };
 
-export const getStaticProps: GetStaticProps = async (context) => {
-
-    const { params } = context;
+export const getStaticProps: GetStaticProps = async ({ params }) => {
 
     const picture = await getPicture({
         date: String(params!.date)
@@ -67,7 +94,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
     return {
         props: {
-            ...picture
+            picture
         }
     };
 

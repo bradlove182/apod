@@ -1,42 +1,41 @@
 
 import create from "zustand";
 import { subscribeWithSelector } from "zustand/middleware";
+import { DateTime } from "luxon";
 
 interface AppState{
-    previousDate: Date;
-    currentDate: Date;
-    nextDate: Date;
-    minDate: Date;
-    maxDate: Date;
+    previousDate: DateTime;
+    currentDate: DateTime;
+    nextDate: DateTime;
+    minDate: DateTime;
+    maxDate: DateTime;
     setDate: (date: Date) => void;
 }
 
-const currentDate = new Date();
-const nextDate = new Date();
-const previousDate = new Date();
-nextDate.setDate(currentDate.getDate() + 1);
-previousDate.setDate(currentDate.getDate() - 1);
-
 const useStore = create<AppState>()(
     subscribeWithSelector((set) => ({
-        currentDate,
-        maxDate: currentDate,
-        minDate: new Date("1995/06/16"),
-        nextDate,
-        previousDate,
+        currentDate: DateTime.utc(),
+        maxDate: DateTime.utc(),
+        minDate: DateTime.utc(1995, 6, 16),
+        nextDate: DateTime.utc().plus({ day: 1 }),
+        previousDate: DateTime.utc().minus({ day: 1 }),
         setDate: (date: Date): void => {
-
-            const nDate = new Date();
-            const pDate = new Date();
-            nDate.setDate(date.getDate() + 1);
-            pDate.setDate(date.getDate() - 1);
+            const currentDate = DateTime.fromISO(DateTime.fromJSDate(date).toISODate());
+            const nextDate = currentDate.plus({ day: 1 });
+            const previousDate = currentDate.minus({ day: 1 });
             set(() => ({
-                currentDate: date,
-                nextDate: nDate,
-                previousDate: pDate
+                currentDate,
+                nextDate,
+                previousDate
             }));
         }
     }))
 );
+
+useStore.subscribe((state) => state.currentDate, (date) => {
+
+    console.log(date);
+
+});
 
 export default useStore;
