@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Head from "next/head";
+import { DateTime } from "luxon";
 
 import { PictureOfTheDay } from "../components/picture";
 import { getPicture } from "../data/api/picture";
 import { dateToString } from "../utils/date";
+import useStore from "../store";
 
 import type {
     GetStaticProps,
@@ -17,16 +19,28 @@ export interface HomePageProps{
 
 export const Home: NextPage<HomePageProps> = ({
     picture
-}) => (
-    <React.Fragment>
-        <Head>
-            <title>
-                { "Astronomy Picture of the Day" }
-            </title>
-        </Head>
-        <PictureOfTheDay picture={ picture } />
-    </React.Fragment>
-);
+}) => {
+
+    const setDate = useStore((state) => state.setDate);
+
+    useEffect(() => {
+
+        setDate(DateTime.utc().toJSDate());
+
+    }, []);
+
+    return (
+        <React.Fragment>
+            <Head>
+                <title>
+                    { "Astronomy Picture of the Day" }
+                </title>
+            </Head>
+            <PictureOfTheDay picture={ picture } />
+        </React.Fragment>
+    );
+
+};
 
 export const getStaticProps: GetStaticProps = async () => {
 

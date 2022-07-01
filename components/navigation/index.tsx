@@ -6,6 +6,7 @@ import React, {
 } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { DateTime } from "luxon";
 
 import { Calendar } from "../calendar";
 import useStore from "../../store";
@@ -19,6 +20,7 @@ export const Navigation: React.ComponentType = () => {
     const previousDate = useStore((state) => state.previousDate);
     const maxDate = useStore((state) => state.maxDate);
     const minDate = useStore((state) => state.minDate);
+    const setDate = useStore((state) => state.setDate);
     const router = useRouter();
 
     const handleModalToggle = useCallback(() => {
@@ -30,6 +32,22 @@ export const Navigation: React.ComponentType = () => {
         }
 
     }, []);
+
+    const handleNextDate = useCallback(() => {
+
+        setDate(DateTime.fromISO(nextDate.toISODate()).toJSDate());
+
+        void router.push(`/${ nextDate.toISODate() }`);
+
+    }, [nextDate]);
+
+    const handlePreviousDate = useCallback(() => {
+
+        setDate(DateTime.fromISO(previousDate.toISODate()).toJSDate());
+
+        void router.push(`/${ previousDate.toISODate() }`);
+
+    }, [previousDate]);
 
     const handleRouteChange = useCallback(() => {
 
@@ -74,7 +92,7 @@ export const Navigation: React.ComponentType = () => {
                 </div>
                 <div className="navbar-center">
                     <div className="btn-group flex">
-                        <button className="btn btn-square" disabled={ previousDate < minDate } type="button">
+                        <button className="btn btn-square" disabled={ previousDate < minDate } onClick={ handlePreviousDate } type="button">
                             <svg
                                 fill="none"
                                 height="20"
@@ -93,7 +111,7 @@ export const Navigation: React.ComponentType = () => {
                         <button className="btn modal-button" onClick={ handleModalToggle } ref={ modalButton } type="button">
                             { currentDate.toISODate() }
                         </button>
-                        <button className="btn btn-square" disabled={ nextDate > maxDate } type="button">
+                        <button className="btn btn-square" disabled={ nextDate > maxDate } onClick={ handleNextDate } type="button">
                             <svg
                                 fill="none"
                                 height="20"
