@@ -2,7 +2,8 @@
 import React, {
     useCallback,
     useEffect,
-    useRef
+    useRef,
+    useState
 } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -15,6 +16,7 @@ export const Navigation: React.ComponentType = () => {
 
     const modalToggle = useRef<HTMLInputElement>(null);
     const modalButton = useRef<HTMLButtonElement>(null);
+    const [loading, setLoading] = useState<boolean>(false);
     const currentDate = useStore((state) => state.currentDate);
     const nextDate = useStore((state) => state.nextDate);
     const previousDate = useStore((state) => state.previousDate);
@@ -57,14 +59,7 @@ export const Navigation: React.ComponentType = () => {
 
         }
 
-        if(modalButton.current?.classList.contains("loading")){
-
-            modalButton.current.classList.remove("loading");
-            return;
-
-        }
-
-        modalButton.current?.classList.add("loading");
+        setLoading((previous) => !previous);
 
     }, []);
 
@@ -85,14 +80,19 @@ export const Navigation: React.ComponentType = () => {
             <nav className="navbar bg-base-100 z-10 px-16 relative">
                 <div className="navbar-start">
                     <Link href="/">
-                        <button className="btn btn-ghost" type="button">
-                            { "APOD" }
+                        <button className="btn btn-tertiary" type="button">
+                            { "Today" }
                         </button>
                     </Link>
                 </div>
                 <div className="navbar-center">
                     <div className="btn-group flex">
-                        <button className="btn btn-square" disabled={ previousDate < minDate } onClick={ handlePreviousDate } type="button">
+                        <button
+                            className="btn btn-square"
+                            disabled={ previousDate < minDate || loading }
+                            onClick={ handlePreviousDate }
+                            type="button"
+                        >
                             <svg
                                 fill="none"
                                 height="20"
@@ -108,10 +108,35 @@ export const Navigation: React.ComponentType = () => {
                                 <polyline points="12 19 5 12 12 5" />
                             </svg>
                         </button>
-                        <button className="btn modal-button" onClick={ handleModalToggle } ref={ modalButton } type="button">
+                        <button
+                            className="btn modal-button relative overflow-hidden"
+                            disabled={ loading }
+                            onClick={ handleModalToggle }
+                            ref={ modalButton }
+                            type="button"
+                        >
                             { currentDate.toISODate() }
+                            <progress
+                                className={ [
+                                    "progress",
+                                    "h-0.5",
+                                    "progress-primary",
+                                    "w-100",
+                                    "absolute",
+                                    "bottom-0",
+                                    "left-0",
+                                    "right-0",
+                                    "rounded-none",
+                                    loading ? "visible" : "hidden"
+                                ].filter(Boolean).join(" ") }
+                            />
                         </button>
-                        <button className="btn btn-square" disabled={ nextDate > maxDate } onClick={ handleNextDate } type="button">
+                        <button
+                            className="btn btn-square"
+                            disabled={ nextDate > maxDate || loading }
+                            onClick={ handleNextDate }
+                            type="button"
+                        >
                             <svg
                                 fill="none"
                                 height="20"

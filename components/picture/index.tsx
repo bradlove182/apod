@@ -11,7 +11,7 @@ export const PictureOfTheDay: React.ComponentType<PictureOfTheDayProps> = ({
     picture
 }) => (
     <div
-        className="h-100 bg-cover bg-center grid content-end p-16 z-1 relative"
+        className="h-full bg-cover bg-center grid content-end p-16 z-1 relative"
         style={ {
             backgroundImage: `url(${ picture.hdurl })`
         } }

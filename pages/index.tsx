@@ -4,7 +4,6 @@ import { DateTime } from "luxon";
 
 import { PictureOfTheDay } from "../components/picture";
 import { getPicture } from "../data/api/picture";
-import { dateToString } from "../utils/date";
 import useStore from "../store";
 
 import type {
@@ -44,10 +43,8 @@ export const Home: NextPage<HomePageProps> = ({
 
 export const getStaticProps: GetStaticProps = async () => {
 
-    const today = dateToString(new Date());
-
     const picture = await getPicture({
-        date: today
+        date: DateTime.utc().toISODate()
     });
 
     return {

@@ -1,3 +1,9 @@
 {
-    "extends": "@newsteam/stylelint-config"
+    "extends": "@newsteam/stylelint-config",
+    "rules": {
+        "at-rule-allowed-list": ["tailwind", "apply"],
+        "at-rule-no-unknown": {
+            "ignoreAtRules": "tailwind"
+        }
+    }
 }

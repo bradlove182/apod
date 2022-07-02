@@ -2,3 +2,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.progress{
+
+    &:indeterminate:after{
+
+        @apply rounded-none;
+        animation-duration: 1s;
+
+    }
+
+}
