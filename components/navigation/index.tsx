@@ -77,11 +77,24 @@ export const Navigation: React.ComponentType = () => {
 
     return (
         <React.Fragment>
-            <nav className="navbar bg-base-100 z-10 px-16 relative">
+            <nav className="navbar bg-base-100 z-10 container m-auto relative">
                 <div className="navbar-start">
                     <Link href="/">
-                        <button className="btn btn-tertiary" type="button">
-                            { "Today" }
+                        <button className="btn btn-tertiary btn-square" disabled={ loading } type="button">
+                            <svg
+                                fill="none"
+                                height="24"
+                                stroke="currentColor"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                viewBox="0 0 24 24"
+                                width="24"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <circle cx="12" cy="12" r="10" />
+                                <polyline points="12 6 12 12 16 14" />
+                            </svg>
                         </button>
                     </Link>
                 </div>
@@ -155,7 +168,7 @@ export const Navigation: React.ComponentType = () => {
                     </div>
                 </div>
                 <div className="navbar-end">
-                    <button className="btn btn-primary btn-square" type="button">
+                    <button className="btn btn-primary btn-square" disabled={ loading } type="button">
                         <svg
                             fill="currentColor"
                             height="20"
@@ -174,13 +187,15 @@ export const Navigation: React.ComponentType = () => {
                         </svg>
                     </button>
                 </div>
-                <input className="modal-toggle" id="my-modal-3" ref={ modalToggle } type="checkbox" />
-                <div className="modal">
+                <input className="modal-toggle" id="calander-modal" ref={ modalToggle } type="checkbox" />
+                <div className="modal modal-bottom sm:modal-middle">
                     <div className="modal-box relative">
-                        <label className="btn btn-sm btn-circle absolute right-2 top-2" htmlFor="my-modal-3">
-                            {"✕"}
-                        </label>
                         <Calendar />
+                        <div className="modal-action">
+                            <label className="btn btn-ghost" htmlFor="calander-modal">
+                                {"Close"}
+                            </label>
+                        </div>
                     </div>
                 </div>
             </nav>
