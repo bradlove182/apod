@@ -38,14 +38,17 @@ export const PictureOfTheDay: React.ComponentType<PictureOfTheDayProps> = ({
         <div className="grid auto-rows-min">
             <div className="relative bg-base-300 flex align-center justify-center h-[56.25vh] relative">
                 {
-                    loading ? "Loading" : undefined
+                    loading ? "Loading" : (
+                        <React.Fragment>
+                            <img alt={ picture.title } loading="lazy" ref={ image } />
+                            <div className="absolute bottom-0 left-0 w-full">
+                                <div className="container mx-auto flex justify-end p-2">
+                                    <PictureActions />
+                                </div>
+                            </div>
+                        </React.Fragment>
+                    )
                 }
-                <img alt={ picture.title } loading="lazy" ref={ image } />
-                <div className="absolute bottom-0 left-0 w-full">
-                    <div className="container mx-auto flex justify-end p-2">
-                        <PictureActions />
-                    </div>
-                </div>
             </div>
             <div className="container mx-auto my-8 p-2">
                 <div className="prose">
