@@ -4,17 +4,20 @@ import { subscribeWithSelector } from "zustand/middleware";
 import { DateTime } from "luxon";
 
 interface AppState{
+    loading: boolean;
     previousDate: DateTime;
     currentDate: DateTime;
     nextDate: DateTime;
     minDate: DateTime;
     maxDate: DateTime;
     setDate: (date: Date) => void;
+    setLoading: (loading: boolean) => void;
 }
 
 const useStore = create<AppState>()(
     subscribeWithSelector((set) => ({
         currentDate: DateTime.utc(),
+        loading: false,
         maxDate: DateTime.utc(),
         minDate: DateTime.utc(1995, 6, 16),
         nextDate: DateTime.utc().plus({ day: 1 }),
@@ -28,14 +31,13 @@ const useStore = create<AppState>()(
                 nextDate,
                 previousDate
             }));
+        },
+        setLoading: (loading): void => {
+            set(() => ({
+                loading
+            }));
         }
     }))
 );
-
-useStore.subscribe((state) => state.currentDate, (date) => {
-
-    console.log(date);
-
-});
 
 export default useStore;

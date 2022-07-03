@@ -25,7 +25,7 @@
         @apply flex;
         @apply btn-group;
 
-        .react-calendar__navigation__arrow{
+        .react-calendar__navigation__arrow,{
 
             @apply btn-square;
 
@@ -92,6 +92,12 @@
             @apply btn-primary;
 
         }
+
+    }
+
+    .react-calendar__navigation__label{
+
+        @apply px-0;
 
     }
 

@@ -1,5 +1,11 @@
 
-import React from "react";
+import React, {
+    useEffect,
+    useRef,
+    useState
+} from "react";
+
+import { PictureActions } from "./actions";
 
 import type { Picture } from "../../data/api/picture/types";
 
@@ -9,24 +15,58 @@ export interface PictureOfTheDayProps{
 
 export const PictureOfTheDay: React.ComponentType<PictureOfTheDayProps> = ({
     picture
-}) => (
-    <div
-        className="h-full bg-cover bg-center grid content-end p-16 z-1 relative"
-        style={ {
-            backgroundImage: `url(${ picture.hdurl })`
-        } }
-    >
-        <div className="absolute top-0 left-0 right-0 bottom-0 z-0 bg-gradient-to-t from-black via-transparent" />
-        <div className="relative grid grid-cols-2 grid-rows-1 z-1">
-            <div className="col-span-1 col-start-1 prose">
-                <h1>
-                    { picture.title }
-                </h1>
-                <p>
-                    { picture.explanation }
-                </p>
+}) => {
+
+    const image = useRef<HTMLImageElement>(null);
+    const [loading, setLoading] = useState<boolean>(true);
+
+    useEffect(() => {
+
+        const loadImage = new Image();
+        loadImage.src = picture.url;
+
+        loadImage.addEventListener("load", () => {
+            if(image.current){
+                image.current.src = loadImage.src;
+                setLoading(false);
+            }
+        });
+
+    }, []);
+
+    return (
+        <div className="grid auto-rows-min">
+            <div className="relative bg-base-300 flex align-center justify-center h-[56.25vh] relative">
+                <img alt={ picture.title } loading="lazy" ref={ image } />
+                <div className="absolute bottom-0 left-0 w-full">
+                    <div className="container mx-auto flex justify-end p-2">
+                        <PictureActions />
+                    </div>
+                </div>
+            </div>
+            <div className="container mx-auto my-8 p-2">
+                <div className="prose">
+                    <div className="flex space-between">
+                        <h1>
+                            { picture.title }
+                        </h1>
+                    </div>
+                    <div className="flex gap-2">
+                        {
+                            picture.copyright ? (
+                                <span className="badge">
+                                    { `Copyright: ${ picture.copyright }` }
+                                </span>
+                            ) : undefined
+                        }
+                    </div>
+                    <p>
+                        { picture.explanation }
+                    </p>
+                </div>
             </div>
         </div>
-    </div>
-);
+    );
+
+};
 
