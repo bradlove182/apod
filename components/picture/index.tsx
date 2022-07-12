@@ -58,9 +58,6 @@ export const PictureOfTheDay: React.ComponentType<PictureOfTheDayProps> = ({
                     transition: "height .3s ease-out"
                 } }
             >
-                {
-                    loading ? "Loading" : undefined
-                }
                 <div
                     className={ [
                         "absolute h-full w-full z-0 bg-cover bg-center blur-lg",
@@ -104,6 +101,11 @@ export const PictureOfTheDay: React.ComponentType<PictureOfTheDayProps> = ({
                         { picture.explanation }
                     </p>
                 </div>
+                <pre>
+                    {
+                        JSON.stringify(picture, undefined, 4)
+                    }
+                </pre>
             </div>
         </div>
     );
