@@ -24,7 +24,7 @@ export const PictureOfTheDay: React.ComponentType<PictureOfTheDayProps> = ({
         height: 1080,
         width: 1920
     });
-    const indexFrame = useRef<HTMLIFrameElement>(null);
+    const frame = useRef<HTMLIFrameElement>(null);
     const image = useRef<HTMLImageElement>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
@@ -86,7 +86,7 @@ export const PictureOfTheDay: React.ComponentType<PictureOfTheDayProps> = ({
                                 </div>
                             </div>
                         </React.Fragment>
-                    ) : <iframe height="100%" sandbox="" src={ picture.url } width="auto" />
+                    ) : <iframe height="100%" ref={ frame } sandbox="" src={ picture.url } width="auto" />
 
 
                 }
