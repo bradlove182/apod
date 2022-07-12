@@ -5,7 +5,7 @@ export interface Picture{
     date: string;
     explanation: string;
     hdurl: string;
-    mediaType: string;
+    mediaType: "image" | "video";
     serviceVersion: string;
     title: string;
     url: string;

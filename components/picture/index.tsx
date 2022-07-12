@@ -67,20 +67,27 @@ export const PictureOfTheDay: React.ComponentType<PictureOfTheDayProps> = ({
                         backgroundImage: `url(${ image.current.src })`
                     } : {} }
                 />
-                <img
-                    alt={ picture.title }
-                    className={ [
-                        "z-10",
-                        loading ? "hidden" : "visible"
-                    ].filter(Boolean).join(" ") }
-                    loading="lazy"
-                    ref={ image }
-                />
-                <div className="absolute bottom-0 left-0 w-full">
-                    <div className="container mx-auto flex justify-end p-2">
-                        <PictureActions />
-                    </div>
-                </div>
+                {
+                    picture.mediaType === "image" ? (
+                        <React.Fragment>
+                            <img
+                                alt={ picture.title }
+                                className={ [
+                                    "z-10",
+                                    loading ? "hidden" : "visible"
+                                ].filter(Boolean).join(" ") }
+                                loading="lazy"
+                                ref={ image }
+                            />
+                            <div className="absolute bottom-0 left-0 w-full">
+                                <div className="container mx-auto flex justify-end p-2">
+                                    <PictureActions />
+                                </div>
+                            </div>
+                        </React.Fragment>
+                    ) : "Video"
+
+                }
             </div>
             <div className="container mx-auto my-8 p-2">
                 <div className="prose">
