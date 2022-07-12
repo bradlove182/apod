@@ -3,7 +3,7 @@ import React from "react";
 import "../styles/globals.css";
 import { Navigation } from "../components/navigation";
 
-import style from "./_app.module.scss";
+import style from "./_app.module.css";
 
 
 import type { AppProps } from "next/app";

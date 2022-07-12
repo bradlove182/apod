@@ -7,6 +7,8 @@ import { useRouter } from "next/router";
 
 import useStore from "../../store";
 
+import style from "./index.module.css";
+
 export const Calendar: React.ComponentType = () => {
 
     const router = useRouter();
@@ -34,6 +36,7 @@ export const Calendar: React.ComponentType = () => {
 
     return (
         <Calander
+            className={ style.calendar }
             locale="EN"
             maxDate={ DateTime.fromISO(maxDate.toISODate()).toJSDate() }
             minDate={ minDate.toJSDate() }

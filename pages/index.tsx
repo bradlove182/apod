@@ -35,7 +35,7 @@ export const Home: NextPage<HomePageProps> = ({
                     { "Astronomy Picture of the Day" }
                 </title>
             </Head>
-            <PictureOfTheDay picture={ picture } />
+            <PictureOfTheDay pictures={ [picture] } />
         </React.Fragment>
     );
 
