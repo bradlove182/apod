@@ -29,6 +29,7 @@ export const PictureOfTheDay: React.ComponentType<PictureOfTheDayProps> = ({
 
     useEffect(() => {
 
+        setLoading(true);
         const loadImage = new Image();
         loadImage.src = picture.url;
 
