@@ -43,7 +43,7 @@ export const PictureOfTheDay: React.ComponentType<PictureOfTheDayProps> = ({
             }
         });
 
-    }, []);
+    }, [picture.url]);
 
     return (
         <div className="grid auto-rows-min">
