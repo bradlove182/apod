@@ -13,11 +13,11 @@ import type {
 import type { Picture } from "../data/api/picture/types";
 
 export interface HomePageProps{
-    picture: Picture;
+    pictures: Picture[];
 }
 
 export const Home: NextPage<HomePageProps> = ({
-    picture
+    pictures
 }) => {
 
     const setDate = useStore((state) => state.setDate);
@@ -35,7 +35,7 @@ export const Home: NextPage<HomePageProps> = ({
                     { "Astronomy Picture of the Day" }
                 </title>
             </Head>
-            <PictureOfTheDay pictures={ [picture] } />
+            <PictureOfTheDay pictures={ pictures } />
         </React.Fragment>
     );
 
@@ -49,7 +49,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
     return {
         props: {
-            picture
+            pictures: [picture]
         },
         revalidate: 60
     };
