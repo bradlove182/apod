@@ -49,7 +49,10 @@ export const PictureOfTheDay: React.ComponentType<PictureOfTheDayProps> = ({
     return (
         <div className="grid auto-rows-min">
             <div
-                className="relative bg-base-300 flex align-center justify-center relative overflow-hidden"
+                className={ [
+                    "relative bg-base-300 flex align-center justify-center relative overflow-hidden",
+                    loading ? "animate-pulse" : ""
+                ].filter(Boolean).join(" ") }
                 style={ {
                     height: `${ dimensions.height / dimensions.width * 100 }vh`,
                     transition: "height .3s ease-out"
@@ -59,7 +62,11 @@ export const PictureOfTheDay: React.ComponentType<PictureOfTheDayProps> = ({
                     loading ? "Loading" : undefined
                 }
                 <div
-                    className="absolute h-full w-full z-0 bg-cover bg-center blur-lg" style={ image.current ? {
+                    className={ [
+                        "absolute h-full w-full z-0 bg-cover bg-center blur-lg",
+                        loading ? "hidden" : "visible"
+                    ].filter(Boolean).join(" ") }
+                    style={ image.current ? {
                         backgroundImage: `url(${ image.current.src })`
                     } : {} }
                 />
