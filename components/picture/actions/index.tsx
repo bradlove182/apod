@@ -2,7 +2,7 @@
 import React from "react";
 
 export const PictureActions: React.ComponentType = () => (
-    <div className="gap-2 flex">
+    <div className="gap-2 flex relative z-20">
         <div className="tooltip" data-tip="Fullscreen">
             <button aria-label="Fullscreen Image" className="btn btn-square btn-sm" type="button">
                 <svg

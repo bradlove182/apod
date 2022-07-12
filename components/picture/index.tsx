@@ -10,24 +10,35 @@ import { PictureActions } from "./actions";
 import type { Picture } from "../../data/api/picture/types";
 
 export interface PictureOfTheDayProps{
-    pictures: Picture[];
+    picture: Picture;
 }
 
 export const PictureOfTheDay: React.ComponentType<PictureOfTheDayProps> = ({
-    pictures
+    picture
 }) => {
 
+    const [dimensions, setDimensions] = useState<{
+        width: number;
+        height: number;
+    }>({
+        height: 1080,
+        width: 1920
+    });
     const image = useRef<HTMLImageElement>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
 
         const loadImage = new Image();
-        loadImage.src = pictures[0].url;
+        loadImage.src = picture.url;
 
         loadImage.addEventListener("load", () => {
             if(image.current){
                 image.current.src = loadImage.src;
+                setDimensions({
+                    height: loadImage.height,
+                    width: loadImage.width
+                });
                 setLoading(false);
             }
         });
@@ -36,7 +47,13 @@ export const PictureOfTheDay: React.ComponentType<PictureOfTheDayProps> = ({
 
     return (
         <div className="grid auto-rows-min">
-            <div className="relative bg-base-300 flex align-center justify-center h-[56.25vh] relative overflow-hidden">
+            <div
+                className="relative bg-base-300 flex align-center justify-center relative overflow-hidden"
+                style={ {
+                    height: `${ dimensions.height / dimensions.width * 100 }vh`,
+                    transition: "height .3s ease-out"
+                } }
+            >
                 {
                     loading ? "Loading" : undefined
                 }
@@ -46,7 +63,7 @@ export const PictureOfTheDay: React.ComponentType<PictureOfTheDayProps> = ({
                     } : {} }
                 />
                 <img
-                    alt={ pictures[0].title }
+                    alt={ picture.title }
                     className={ [
                         "z-10",
                         loading ? "hidden" : "visible"
@@ -61,46 +78,23 @@ export const PictureOfTheDay: React.ComponentType<PictureOfTheDayProps> = ({
                 </div>
             </div>
             <div className="container mx-auto my-8 p-2">
-                <div className="grid grid-cols-2 gap-16">
-                    <div className="prose">
-                        <h1>
-                            { pictures[0].title }
-                        </h1>
-                        {
-                            pictures[0].copyright ? (
-                                <div className="flex gap-2">
-
-                                    <span className="badge">
-                                        { `Image Credit & Copyright: ${ pictures[0].copyright }` }
-                                    </span>
-                                </div>
-                            ) : undefined
-                        }
-                        <p>
-                            { pictures[0].explanation }
-                        </p>
-                    </div>
+                <div className="prose">
+                    <h1>
+                        { picture.title }
+                    </h1>
                     {
-                        pictures[1] ? (
-                            <div className="card bg-base-200 h-min shadow-xl lg:card-side">
-                                <figure>
-                                    <img alt={ pictures[1].title } src={ pictures[1].url } width="20%" />
-                                </figure>
-                                <div className="card-body">
-                                    <span className="badge">
-                                        { "Yesterday" }
-                                    </span>
-                                    <h2 className="card-title">
-                                        { pictures[1].title }
-                                    </h2>
-                                    <p>
-                                        { pictures[1].explanation.slice(0, 120) }
-                                    </p>
-                                </div>
+                        picture.copyright ? (
+                            <div className="flex gap-2">
+
+                                <span className="badge">
+                                    { `Image Credit & Copyright: ${ picture.copyright }` }
+                                </span>
                             </div>
                         ) : undefined
                     }
-
+                    <p>
+                        { picture.explanation }
+                    </p>
                 </div>
             </div>
         </div>
