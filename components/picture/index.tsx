@@ -38,6 +38,8 @@ export const PictureOfTheDay: React.ComponentType<PictureOfTheDayProps> = ({
 
     useEffect(() => {
 
+        const currentFrame = frame.current;
+
         setLoading(true);
 
         if(picture.mediaType === "image"){
@@ -72,14 +74,14 @@ export const PictureOfTheDay: React.ComponentType<PictureOfTheDayProps> = ({
             setLoading(false);
         };
 
-        frame.current?.addEventListener("load", loadFrame);
+        currentFrame?.addEventListener("load", loadFrame);
 
         return () => {
-            frame.current?.removeEventListener("load", loadFrame);
+            currentFrame?.removeEventListener("load", loadFrame);
         };
 
 
-    }, [picture.url]);
+    }, [picture.url, picture.mediaType]);
 
     return (
         <div className="grid auto-rows-min">

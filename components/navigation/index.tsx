@@ -39,7 +39,11 @@ export const Navigation: React.ComponentType = () => {
 
         void router.push(`/${ nextDate.toISODate() }`);
 
-    }, [nextDate]);
+    }, [
+        nextDate,
+        router,
+        setDate
+    ]);
 
     const handlePreviousDate = useCallback(() => {
 
@@ -47,7 +51,11 @@ export const Navigation: React.ComponentType = () => {
 
         void router.push(`/${ previousDate.toISODate() }`);
 
-    }, [previousDate]);
+    }, [
+        previousDate,
+        router,
+        setDate
+    ]);
 
     const handleRouteChange = useCallback(() => {
 
@@ -71,7 +79,10 @@ export const Navigation: React.ComponentType = () => {
             router.events.off("routeChangeComplete", handleRouteChange);
         };
 
-    }, []);
+    }, [
+        handleRouteChange,
+        router
+    ]);
 
     return (
         <React.Fragment>

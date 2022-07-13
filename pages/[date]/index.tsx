@@ -3,7 +3,6 @@ import React, { useEffect } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { DateTime } from "luxon";
-import { camelCase } from "change-case";
 
 import {
     getPicture,
@@ -39,8 +38,11 @@ export const PicturePage: NextPage<PicturePageProps> = ({
 
         }
 
-
-    }, [router.isFallback]);
+    }, [
+        router.isFallback,
+        picture.date,
+        setDate
+    ]);
 
     if(router.isFallback){
         return (
@@ -91,15 +93,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
     if(params?.date){
 
-        const response = await getPicture({
+        picture = await getPicture({
             date: String(params.date)
-        });
-
-        Object.keys(response).map((key) => key).forEach((key) => {
-            picture = {
-                ...picture,
-                [camelCase(key)]: response[key]
-            };
         });
 
     }

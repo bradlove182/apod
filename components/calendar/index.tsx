@@ -32,7 +32,10 @@ export const Calendar: React.ComponentType = () => {
 
         void router.push(`/${ pathDate }`);
 
-    }, []);
+    }, [
+        router,
+        setDate
+    ]);
 
     return (
         <Calander

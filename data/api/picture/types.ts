@@ -1,5 +1,5 @@
 
-export interface Picture extends Record<string, string | undefined>{
+export interface Picture{
 
     copyright?: string;
     date: string;
@@ -9,6 +9,7 @@ export interface Picture extends Record<string, string | undefined>{
     serviceVersion: string;
     title: string;
     url: string;
+    [key: string]: string | undefined;
 
 }
 
@@ -20,11 +21,13 @@ export interface PictureError{
 
 }
 
-export interface GetPicture extends Record<string, string>{
+export interface GetPicture{
+    [key: string]: string;
     date: string;
 }
 
-export interface GetPictures extends Record<string, string>{
+export interface GetPictures{
+    [key: string]: string;
     startDate: string;
     endDate: string;
 }

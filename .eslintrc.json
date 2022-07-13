@@ -1,10 +1,10 @@
 {
-    "extends": ["next/core-web-vitals", "@newsteam"],
+    "extends": ["next/core-web-vitals", "next", "@newsteam"],
     "rules": {
         "@typescript-eslint/no-magic-numbers":"off",
         "id-length":"off",
         "react/jsx-no-leaked-render": 1,
         "postcss-modules/no-unused-class": "off",
-        "@next/next/no-img-element": "off"
+        "@next/next/no-img-element": 0
     }
   }

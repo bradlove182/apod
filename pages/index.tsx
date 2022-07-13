@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import Head from "next/head";
 import { DateTime } from "luxon";
-import { camelCase } from "change-case";
 
 import { PictureOfTheDay } from "../components/picture";
 import { getPicture } from "../data/api/picture";
@@ -27,7 +26,7 @@ export const Home: NextPage<HomePageProps> = ({
 
         setDate(DateTime.utc().toJSDate());
 
-    }, []);
+    }, [setDate]);
 
     return (
         <React.Fragment>
@@ -44,17 +43,8 @@ export const Home: NextPage<HomePageProps> = ({
 
 export const getStaticProps: GetStaticProps = async () => {
 
-    let picture = {};
-
-    const response = await getPicture({
+    const picture = await getPicture({
         date: DateTime.utc().toISODate()
-    });
-
-    Object.keys(response).map((key) => key).forEach((key) => {
-        picture = {
-            ...picture,
-            [camelCase(key)]: response[key]
-        };
     });
 
     return {
