@@ -4,6 +4,7 @@ node_modules
 *.*
 *.css
 *.scss
-!*.js
+*.js
 !*.ts
 !*.tsx
+*.d.ts
