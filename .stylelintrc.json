@@ -1,7 +1,7 @@
 {
     "extends": "@newsteam/stylelint-config",
     "rules": {
-        "at-rule-allowed-list": ["tailwind", "apply"],
+        "at-rule-allowed-list": ["tailwind", "apply", "keyframes"],
         "at-rule-no-unknown": [
             true,
             { "ignoreAtRules": ["tailwind", "apply"] }

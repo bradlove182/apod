@@ -16,12 +16,12 @@ interface AppState{
 
 const useStore = create<AppState>()(
     subscribeWithSelector((set) => ({
-        currentDate: DateTime.utc(),
+        currentDate: DateTime.fromISO(DateTime.utc().toISODate()),
         loading: false,
-        maxDate: DateTime.utc(),
+        maxDate: DateTime.fromISO(DateTime.utc().toISODate()),
         minDate: DateTime.utc(1995, 6, 16),
-        nextDate: DateTime.utc().plus({ day: 1 }),
-        previousDate: DateTime.utc().minus({ day: 1 }),
+        nextDate: DateTime.fromISO(DateTime.utc().toISODate()).plus({ day: 1 }),
+        previousDate: DateTime.fromISO(DateTime.utc().toISODate()).minus({ day: 1 }),
         setDate: (date: Date): void => {
             const currentDate = DateTime.fromISO(DateTime.fromJSDate(date).toISODate());
             const nextDate = currentDate.plus({ day: 1 });

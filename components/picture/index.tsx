@@ -9,6 +9,14 @@ import { PictureActions } from "./actions";
 
 import type { Picture } from "../../data/api/picture/types";
 
+const calculateDimensions = (width: number, height: number): number => {
+
+    const response = (width > height ? height / width : width / height) * 100;
+
+    return response > 66.6 ? 66.6 : response;
+
+};
+
 export interface PictureOfTheDayProps{
     picture: Picture;
 }
@@ -31,19 +39,45 @@ export const PictureOfTheDay: React.ComponentType<PictureOfTheDayProps> = ({
     useEffect(() => {
 
         setLoading(true);
-        const loadImage = new Image();
-        loadImage.src = picture.url;
 
-        loadImage.addEventListener("load", () => {
-            if(image.current){
-                image.current.src = loadImage.src;
-                setDimensions({
-                    height: loadImage.height,
-                    width: loadImage.width
-                });
-                setLoading(false);
-            }
-        });
+        if(picture.mediaType === "image"){
+
+            const newImage = new Image();
+            newImage.src = picture.url;
+
+            const loadImage = (): void => {
+                if(image.current){
+                    image.current.src = newImage.src;
+                    setDimensions({
+                        height: newImage.height,
+                        width: newImage.width
+                    });
+                    setLoading(false);
+                }
+            };
+
+            newImage.addEventListener("load", loadImage);
+
+            return () => {
+                newImage.removeEventListener("load", loadImage);
+            };
+
+        }
+
+        const loadFrame = (): void => {
+            setDimensions({
+                height: window.innerWidth / 1.25,
+                width: window.innerWidth
+            });
+            setLoading(false);
+        };
+
+        frame.current?.addEventListener("load", loadFrame);
+
+        return () => {
+            frame.current?.removeEventListener("load", loadFrame);
+        };
+
 
     }, [picture.url]);
 
@@ -52,41 +86,54 @@ export const PictureOfTheDay: React.ComponentType<PictureOfTheDayProps> = ({
             <div
                 className={ [
                     "relative bg-base-300 flex align-center justify-center relative overflow-hidden",
-                    loading ? "animate-pulse" : ""
+                    loading ? "bg-gradient-to-r from-base-300 via-neutral to-base-300 background-animate" : ""
                 ].filter(Boolean).join(" ") }
                 style={ {
-                    height: `${ dimensions.height / dimensions.width * 100 }vh`,
+                    height: `${ calculateDimensions(dimensions.width, dimensions.height) }vh`,
                     transition: "height .3s ease-out"
                 } }
             >
-                <div
-                    className={ [
-                        "absolute h-full w-full z-0 bg-cover bg-center blur-lg",
-                        loading ? "hidden" : "visible"
-                    ].filter(Boolean).join(" ") }
-                    style={ image.current ? {
-                        backgroundImage: `url(${ image.current.src })`
-                    } : {} }
-                />
                 {
                     picture.mediaType === "image" ? (
                         <React.Fragment>
+                            <div
+                                className={ [
+                                    "absolute h-full w-full z-0 bg-cover bg-center blur-lg",
+                                    loading ? "hidden" : "visible"
+                                ].filter(Boolean).join(" ") }
+                                style={ image.current ? {
+                                    backgroundImage: `url(${ image.current.src })`
+                                } : {} }
+                            />
                             <img
                                 alt={ picture.title }
                                 className={ [
-                                    "z-10",
+                                    "z-10 ",
                                     loading ? "hidden" : "visible"
                                 ].filter(Boolean).join(" ") }
+                                height={ dimensions.height }
                                 loading="lazy"
                                 ref={ image }
+                                style={ {
+                                    objectFit: "contain"
+                                } }
+                                width={ dimensions.width }
                             />
                             <div className="absolute bottom-0 left-0 w-full">
                                 <div className="container mx-auto flex justify-end p-2">
-                                    <PictureActions />
+                                    <PictureActions picture={ picture } />
                                 </div>
                             </div>
                         </React.Fragment>
-                    ) : <iframe height="100%" ref={ frame } sandbox="" src={ picture.url } width="auto" />
+                    ) : (
+                        // eslint-disable-next-line react/iframe-missing-sandbox -- Unsafe I know
+                        <iframe
+                            height="100%"
+                            ref={ frame }
+                            src={ picture.url }
+                            width="100%"
+                        />
+                    )
 
 
                 }
@@ -96,25 +143,19 @@ export const PictureOfTheDay: React.ComponentType<PictureOfTheDayProps> = ({
                     <h1>
                         { picture.title }
                     </h1>
+                    <p>
+                        { picture.explanation }
+                    </p>
                     {
                         picture.copyright ? (
                             <div className="flex gap-2">
-
                                 <span className="badge">
-                                    { `Image Credit & Copyright: ${ picture.copyright }` }
+                                    { `Credit & Copyright: ${ picture.copyright }` }
                                 </span>
                             </div>
                         ) : undefined
                     }
-                    <p>
-                        { picture.explanation }
-                    </p>
                 </div>
-                <pre>
-                    {
-                        JSON.stringify(picture, undefined, 4)
-                    }
-                </pre>
             </div>
         </div>
     );

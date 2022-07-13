@@ -1,5 +1,5 @@
 
-export interface Picture{
+export interface Picture extends Record<string, string | undefined>{
 
     copyright?: string;
     date: string;
