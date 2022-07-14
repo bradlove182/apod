@@ -7,7 +7,7 @@ import { getPicture } from "../data/api/picture";
 import useStore from "../store";
 
 import type {
-    GetServerSideProps,
+    GetStaticProps,
     NextPage
 } from "next";
 import type { Picture } from "../data/api/picture/types";
@@ -41,7 +41,7 @@ export const Home: NextPage<HomePageProps> = ({
 
 };
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getStaticProps: GetStaticProps = async () => {
 
     const picture = await getPicture({
         date: DateTime.utc().toISODate()
@@ -50,7 +50,8 @@ export const getServerSideProps: GetServerSideProps = async () => {
     return {
         props: {
             picture
-        }
+        },
+        revalidate: 60
     };
 
 };
