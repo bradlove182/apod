@@ -5,7 +5,6 @@ import { Navigation } from "../components/navigation";
 
 import style from "./_app.module.css";
 
-
 import type { AppProps } from "next/app";
 
 const MyApp = ({
