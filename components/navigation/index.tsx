@@ -170,6 +170,8 @@ export const Navigation: React.ComponentType = () => {
                     </div>
                 </nav>
             </div>
+            <input aria-hidden="true" className="modal-toggle hidden" id="calander-modal" ref={ modalToggle } type="checkbox" />
+            <input aria-hidden="true" className="modal-toggle hidden" id="info-modal" ref={ infoToggle } type="checkbox" />
             <div className="modal modal-bottom sm:modal-middle">
                 <div className="modal-box relative">
                     <Calendar />
@@ -204,8 +206,6 @@ export const Navigation: React.ComponentType = () => {
                     </div>
                 </div>
             </div>
-            <input aria-hidden="true" className="modal-toggle" id="calander-modal" ref={ modalToggle } tabIndex={ -1 } type="checkbox" />
-            <input aria-hidden="true" className="modal-toggle" id="info-modal" ref={ infoToggle } tabIndex={ -1 } type="checkbox" />
         </React.Fragment>
     );
 
