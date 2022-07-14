@@ -26,10 +26,12 @@ export const NavigationActions: React.ComponentType<NavigationActionsProps> = ({
     return (
         <div className="btn-group flex">
             <button
-                aria-label="Yesterday's Astronomy Image"
+                aria-disabled={ nextDate > maxDate || loading }
+                aria-label="Yesterday's astronomy image"
                 className="btn btn-square"
                 disabled={ previousDate < minDate || loading }
                 onClick={ handlePreviousDate }
+                tabIndex={ 2 }
                 type="button"
             >
                 <svg
@@ -48,9 +50,11 @@ export const NavigationActions: React.ComponentType<NavigationActionsProps> = ({
                 </svg>
             </button>
             <button
+                aria-label={ "Open calendar to select new date" }
                 className="btn modal-button relative overflow-hidden"
                 disabled={ loading }
                 onClick={ handleModalToggle }
+                tabIndex={ 1 }
                 type="button"
             >
                 { currentDate.toISODate() }
@@ -70,9 +74,12 @@ export const NavigationActions: React.ComponentType<NavigationActionsProps> = ({
                 />
             </button>
             <button
+                aria-disabled={ nextDate > maxDate || loading }
+                aria-label={ "Tomorrow's astronomy image" }
                 className="btn btn-square"
                 disabled={ nextDate > maxDate || loading }
                 onClick={ handleNextDate }
+                tabIndex={ 3 }
                 type="button"
             >
                 <svg

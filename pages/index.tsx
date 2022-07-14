@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import Head from "next/head";
 import { DateTime } from "luxon";
 
 import { PictureOfTheDay } from "../components/picture";
@@ -30,11 +29,6 @@ export const Home: NextPage<HomePageProps> = ({
 
     return (
         <React.Fragment>
-            <Head>
-                <title>
-                    { "Astronomy Picture of the Day" }
-                </title>
-            </Head>
             <PictureOfTheDay picture={ picture } />
         </React.Fragment>
     );

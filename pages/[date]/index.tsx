@@ -9,6 +9,7 @@ import {
     getPictures
 } from "../../data/api/picture";
 import { PictureOfTheDay } from "../../components/picture";
+import { PictureOfTheDayFallback } from "../../components/picture/fallback";
 import useStore from "../../store";
 
 import type { Picture } from "../../data/api/picture/types";
@@ -42,9 +43,7 @@ export const PicturePage: NextPage<PicturePageProps> = ({
 
     if(router.isFallback){
         return (
-            <div>
-                { "Loading" }
-            </div>
+            <PictureOfTheDayFallback />
         );
     }
 
@@ -85,11 +84,19 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 
-    let picture = {};
+    let picture = {} as Picture;
 
     picture = await getPicture({
         date: String(params!.date)
     });
+
+    if(!picture.date){
+
+        return {
+            notFound: true
+        };
+
+    }
 
     return {
         props: {

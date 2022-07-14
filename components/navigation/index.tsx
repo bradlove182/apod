@@ -17,6 +17,7 @@ import { NavigationActions } from "./actions";
 export const Navigation: React.ComponentType = () => {
 
     const modalToggle = useRef<HTMLInputElement>(null);
+    const infoToggle = useRef<HTMLInputElement>(null);
     const [loading, setLoading] = useState<boolean>(false);
     const nextDate = useStore((state) => state.nextDate);
     const previousDate = useStore((state) => state.previousDate);
@@ -28,6 +29,16 @@ export const Navigation: React.ComponentType = () => {
         if(modalToggle.current){
 
             modalToggle.current.checked = true;
+
+        }
+
+    }, []);
+
+    const handleInfoToggle = useCallback(() => {
+
+        if(infoToggle.current){
+
+            infoToggle.current.checked = true;
 
         }
 
@@ -108,8 +119,15 @@ export const Navigation: React.ComponentType = () => {
                                         width="20"
                                         xmlns="http://www.w3.org/2000/svg"
                                     >
-                                        <circle cx="12" cy="12" r="10" />
-                                        <polyline points="12 6 12 12 16 14" />
+                                        <circle cx="12" cy="12" r="5" />
+                                        <line x1="12" x2="12" y1="1" y2="3" />
+                                        <line x1="12" x2="12" y1="21" y2="23" />
+                                        <line x1="4.22" x2="5.64" y1="4.22" y2="5.64" />
+                                        <line x1="18.36" x2="19.78" y1="18.36" y2="19.78" />
+                                        <line x1="1" x2="3" y1="12" y2="12" />
+                                        <line x1="21" x2="23" y1="12" y2="12" />
+                                        <line x1="4.22" x2="5.64" y1="19.78" y2="18.36" />
+                                        <line x1="18.36" x2="19.78" y1="5.64" y2="4.22" />
                                     </svg>
                                 </button>
                             </Link>
@@ -124,24 +142,31 @@ export const Navigation: React.ComponentType = () => {
                         />
                     </div>
                     <div className="navbar-end">
-                        <button className="btn btn-primary btn-square" disabled={ loading } type="button">
-                            <svg
-                                fill="currentColor"
-                                height="20"
-                                stroke="currentColor"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                viewBox="0 0 24 24"
-                                width="20"
-                                xmlns="http://www.w3.org/2000/svg"
+                        <div className="tooltip tooltip-bottom sm:tooltip-left" data-tip="Information">
+                            <button
+                                aria-label="Astronomy Picture of the Day"
+                                className="btn btn-square"
+                                disabled={ loading }
+                                onClick={ handleInfoToggle }
+                                type="button"
                             >
-                                <path
-                                // eslint-disable-next-line max-len -- no
-                                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
-                                />
-                            </svg>
-                        </button>
+                                <svg
+                                    fill="none"
+                                    height="20"
+                                    stroke="currentColor"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth="2"
+                                    viewBox="0 0 24 24"
+                                    width="20"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                >
+                                    <circle cx="12" cy="12" r="10" />
+                                    <line x1="12" x2="12" y1="16" y2="12" />
+                                    <line x1="12" x2="12.01" y1="8" y2="8" />
+                                </svg>
+                            </button>
+                        </div>
                     </div>
                 </nav>
             </div>
@@ -151,6 +176,31 @@ export const Navigation: React.ComponentType = () => {
                     <Calendar />
                     <div className="modal-action">
                         <label className="btn btn-ghost" htmlFor="calander-modal">
+                            {"Close"}
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <input className="modal-toggle" id="info-modal" ref={ infoToggle } type="checkbox" />
+            <div className="modal modal-bottom sm:modal-middle">
+                <div className="modal-box relative">
+                    <div className="prose">
+                        <h3>
+                            { "Astronomy Picture of the Day" }
+                        </h3>
+                        <p>
+                            { /* eslint-disable-next-line max-len -- bra */ }
+                            { "Each day a different image or photograph of our fascinating universe is featured, along with a brief explanation written by a professional astronomer." }
+                        </p>
+                    </div>
+                    <div className="modal-action">
+                        <a className="btn btn-link" href="https://www.bradlove.dev/" rel="noreferrer" target="_blank">
+                            { "Bradley Love" }
+                        </a>
+                        <a className="btn btn-link" href="https://api.nasa.gov/" rel="noreferrer" target="_blank">
+                            { "APOD API" }
+                        </a>
+                        <label className="btn btn-ghost" htmlFor="info-modal">
                             {"Close"}
                         </label>
                     </div>
