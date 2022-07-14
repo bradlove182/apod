@@ -38,11 +38,7 @@ export const PicturePage: NextPage<PicturePageProps> = ({
 
         }
 
-    }, [
-        router.isFallback,
-        picture.date,
-        setDate
-    ]);
+    }, [router.isFallback]);
 
     if(router.isFallback){
         return (
@@ -91,13 +87,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
     let picture = {};
 
-    if(params?.date){
-
-        picture = await getPicture({
-            date: String(params.date)
-        });
-
-    }
+    picture = await getPicture({
+        date: String(params!.date)
+    });
 
     return {
         props: {
