@@ -31,7 +31,6 @@ export const NavigationActions: React.ComponentType<NavigationActionsProps> = ({
                 className="btn btn-square"
                 disabled={ previousDate < minDate || loading }
                 onClick={ handlePreviousDate }
-                tabIndex={ 2 }
                 type="button"
             >
                 <svg
@@ -54,7 +53,6 @@ export const NavigationActions: React.ComponentType<NavigationActionsProps> = ({
                 className="btn modal-button relative overflow-hidden"
                 disabled={ loading }
                 onClick={ handleModalToggle }
-                tabIndex={ 1 }
                 type="button"
             >
                 { currentDate.toISODate() }
@@ -79,7 +77,6 @@ export const NavigationActions: React.ComponentType<NavigationActionsProps> = ({
                 className="btn btn-square"
                 disabled={ nextDate > maxDate || loading }
                 onClick={ handleNextDate }
-                tabIndex={ 3 }
                 type="button"
             >
                 <svg

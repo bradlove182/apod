@@ -19,7 +19,7 @@ const MyApp = ({
                 { "Astronomy Picture of the Day" }
             </title>
             <link href="/favicon.svg" rel="icon" />
-            <meta content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover" name="viewport" />
+            <meta content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover" name="viewport" />
 
             <meta content="PWA App" name="application-name" />
             <meta content="yes" name="apple-mobile-web-app-capable" />
