@@ -121,11 +121,6 @@ export const PictureOfTheDay: React.ComponentType<PictureOfTheDayProps> = ({
                                 } }
                                 width={ dimensions.width }
                             />
-                            <div className="absolute bottom-0 left-0 w-full">
-                                <div className="container mx-auto flex justify-end p-2">
-                                    <PictureActions picture={ picture } />
-                                </div>
-                            </div>
                         </React.Fragment>
                     ) : (
                         // eslint-disable-next-line react/iframe-missing-sandbox -- Unsafe I know
@@ -141,13 +136,10 @@ export const PictureOfTheDay: React.ComponentType<PictureOfTheDayProps> = ({
                 }
             </div>
             <div className="container mx-auto my-8 p-2">
-                <div className="prose">
+                <div className="prose md:prose-lg">
                     <h1>
                         { picture.title }
                     </h1>
-                    <p>
-                        { picture.explanation }
-                    </p>
                     {
                         picture.copyright ? (
                             <div className="flex gap-2">
@@ -157,6 +149,10 @@ export const PictureOfTheDay: React.ComponentType<PictureOfTheDayProps> = ({
                             </div>
                         ) : undefined
                     }
+                    <p>
+                        { picture.explanation }
+                    </p>
+                    <PictureActions picture={ picture } />
                 </div>
             </div>
         </div>
