@@ -30,7 +30,7 @@ const MyApp = ({
             <meta content="/icons/browserconfig.xml" name="msapplication-config" />
             <meta content="#272935" name="msapplication-TileColor" />
             <meta content="no" name="msapplication-tap-highlight" />
-            <meta content="#ff79c6" name="theme-color" />
+            <meta content="#272935" name="theme-color" />
 
             <link href="/icons/icon-192x192.svg" rel="apple-touch-icon" />
             <link href="/icons/icon-192x192.svg" rel="apple-touch-icon" sizes="152x152" />
@@ -38,7 +38,7 @@ const MyApp = ({
             <link href="/icons/icon-192x192.svg" rel="apple-touch-icon" sizes="167x167" />
 
             <link href="/manifest.json" rel="manifest" />
-            <link color="#ff79c6" href="/icons/icon-192x192.svg" rel="mask-icon" />
+            <link color="#272935" href="/icons/icon-192x192.svg" rel="mask-icon" />
             <link href="/favicon.svg" rel="shortcut icon" />
 
             <meta content="summary" name="twitter:card" />
