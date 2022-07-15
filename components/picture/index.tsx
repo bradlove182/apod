@@ -121,6 +121,11 @@ export const PictureOfTheDay: React.ComponentType<PictureOfTheDayProps> = ({
                                 } }
                                 width={ dimensions.width }
                             />
+                            <div className="absolute bottom-0 left-0 w-full">
+                                <div className="container mx-auto flex justify-end p-2">
+                                    <PictureActions picture={ picture } />
+                                </div>
+                            </div>
                         </React.Fragment>
                     ) : (
                         // eslint-disable-next-line react/iframe-missing-sandbox -- Unsafe I know
@@ -152,7 +157,6 @@ export const PictureOfTheDay: React.ComponentType<PictureOfTheDayProps> = ({
                     <p>
                         { picture.explanation }
                     </p>
-                    <PictureActions picture={ picture } />
                 </div>
             </div>
         </div>

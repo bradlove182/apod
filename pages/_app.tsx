@@ -11,7 +11,7 @@ const MyApp = ({
     Component,
     pageProps
 }: AppProps): React.ReactElement => (
-    <div className="flex flex-col-reverse md:flex-col">
+    <div className="grid">
         <Head>
             <title>
                 { "Astronomy Picture of the Day" }
