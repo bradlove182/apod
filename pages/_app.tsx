@@ -44,7 +44,7 @@ const MyApp = ({
             <link href="/favicon.svg" rel="shortcut icon" />
 
             <meta content="summary" name="twitter:card" />
-            <meta content="https://apod.bradlove.dev" name="twitter:url" />
+            <meta content="https://apod.bradlove.dev/" name="twitter:url" />
             <meta content="Astronomy Picture of the Day" name="twitter:title" />
             {/* eslint-disable-next-line max-len -- description */}
             <meta content="Each day a different image or photograph of our fascinating universe is featured, along with a brief explanation written by a professional astronomer." name="twitter:description" />
