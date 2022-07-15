@@ -32,13 +32,13 @@ const MyApp = ({
             <meta content="no" name="msapplication-tap-highlight" />
             <meta content="#272935" name="theme-color" />
 
-            <link href="/icons/icon-192x192.svg" rel="apple-touch-icon" />
-            <link href="/icons/icon-192x192.svg" rel="apple-touch-icon" sizes="152x152" />
-            <link href="/icons/icon-192x192.svg" rel="apple-touch-icon" sizes="180x180" />
-            <link href="/icons/icon-192x192.svg" rel="apple-touch-icon" sizes="167x167" />
+            <link href="/icons/icon-192x192.png" rel="apple-touch-icon" />
+            <link href="/icons/icon-192x192.png" rel="apple-touch-icon" sizes="152x152" />
+            <link href="/icons/icon-192x192.png" rel="apple-touch-icon" sizes="180x180" />
+            <link href="/icons/icon-192x192.png" rel="apple-touch-icon" sizes="167x167" />
 
             <link href="/manifest.json" rel="manifest" />
-            <link color="#272935" href="/icons/icon-192x192.svg" rel="mask-icon" />
+            <link color="#272935" href="/icons/icon-192x192.png" rel="mask-icon" />
             <link href="/favicon.svg" rel="shortcut icon" />
 
             <meta content="summary" name="twitter:card" />
@@ -46,14 +46,14 @@ const MyApp = ({
             <meta content="Astronomy Picture of the Day" name="twitter:title" />
             {/* eslint-disable-next-line max-len -- description */}
             <meta content="Each day a different image or photograph of our fascinating universe is featured, along with a brief explanation written by a professional astronomer." name="twitter:description" />
-            <meta content="https://apod.bradlove.dev/icons/icon-192x192.svg" name="twitter:image" />
+            <meta content="https://apod.bradlove.dev/icons/icon-192x192.png" name="twitter:image" />
             <meta content="website" property="og:type" />
             <meta content="Astronomy Picture of the Day" property="og:title" />
             {/* eslint-disable-next-line max-len -- description */}
             <meta content="Each day a different image or photograph of our fascinating universe is featured, along with a brief explanation written by a professional astronomer." property="og:description" />
             <meta content="Astronomy Picture of the Day" property="og:site_name" />
             <meta content="https://apod.bradlove.dev/" property="og:url" />
-            <meta content="https://apod.bradlove.dev/icons/icon-192x192.svg" property="og:image" />
+            <meta content="https://apod.bradlove.dev/icons/icon-192x192.png" property="og:image" />
         </Head>
         <Navigation />
         <Component { ...pageProps } />
