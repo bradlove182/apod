@@ -104,7 +104,7 @@ export const Navigation: React.ComponentType = () => {
 
     return (
         <React.Fragment>
-            <div className="sticky backdrop-blur bg-opacity-90 top-0 bg-base-100 z-50">
+            <div className="sticky backdrop-blur bg-opacity-90 inset-0 bg-base-100 z-50">
                 <nav className="navbar m-auto container">
                     <div className="navbar-start">
                         <div className="tooltip tooltip-bottom sm:tooltip-right" data-tip="Today">
