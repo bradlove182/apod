@@ -14,6 +14,7 @@ import useStore from "../../store";
 
 import { NavigationActions } from "./actions";
 
+// eslint-disable-next-line max-lines-per-function -- no
 export const Navigation: React.ComponentType = () => {
 
     const modalToggle = useRef<HTMLInputElement>(null);
@@ -73,6 +74,12 @@ export const Navigation: React.ComponentType = () => {
         if(modalToggle.current){
 
             modalToggle.current.checked = false;
+
+        }
+
+        if(infoToggle.current){
+
+            infoToggle.current.checked = false;
 
         }
 
@@ -170,8 +177,7 @@ export const Navigation: React.ComponentType = () => {
                     </div>
                 </nav>
             </div>
-            <input aria-hidden="true" className="modal-toggle hidden" id="calander-modal" ref={ modalToggle } type="checkbox" />
-            <input aria-hidden="true" className="modal-toggle hidden" id="info-modal" ref={ infoToggle } type="checkbox" />
+            <input aria-hidden="true" className="modal-toggle" id="calander-modal" ref={ modalToggle } type="checkbox" />
             <div className="modal modal-bottom sm:modal-middle">
                 <div className="modal-box relative">
                     <Calendar />
@@ -182,6 +188,7 @@ export const Navigation: React.ComponentType = () => {
                     </div>
                 </div>
             </div>
+            <input aria-hidden="true" className="modal-toggle" id="info-modal" ref={ infoToggle } type="checkbox" />
             <div className="modal modal-bottom sm:modal-middle">
                 <div className="modal-box relative">
                     <div className="prose">
