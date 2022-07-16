@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { DateTime } from "luxon";
+import Head from "next/head";
 
 import { PictureOfTheDay } from "../components/picture";
 import { getPicture } from "../data/api/picture";
@@ -29,6 +30,9 @@ export const Home: NextPage<HomePageProps> = ({
 
     return (
         <React.Fragment>
+            <Head>
+                <meta content={ picture.url } property="og:image" />
+            </Head>
             <PictureOfTheDay picture={ picture } />
         </React.Fragment>
     );
