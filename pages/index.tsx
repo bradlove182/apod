@@ -24,7 +24,7 @@ export const Home: NextPage<HomePageProps> = ({
 
     useEffect(() => {
 
-        setDate(DateTime.utc().toJSDate());
+        setDate(DateTime.fromISO(picture.date).toJSDate());
 
     }, [setDate]);
 
