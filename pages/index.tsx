@@ -32,6 +32,8 @@ export const Home: NextPage<HomePageProps> = ({
         <React.Fragment>
             <Head>
                 <meta content={ picture.url } property="og:image" />
+                <meta content={ picture.title } property="og:title" />
+                <meta content={ picture.explanation } property="og:description" />
             </Head>
             <PictureOfTheDay picture={ picture } />
         </React.Fragment>
