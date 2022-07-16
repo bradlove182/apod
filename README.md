@@ -1,4 +1,8 @@
 
+## Astronomy Picture of the Day
+
+Each day a different image or photograph of our fascinating universe is featured, along with a brief explanation written by a professional astronomer.
+
 ## Getting Started
 
 First, create a .env.local with the follow:
