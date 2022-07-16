@@ -47,13 +47,9 @@ const MyApp = ({
             {/* eslint-disable-next-line max-len -- description */}
             <meta content="Each day a different image or photograph of our fascinating universe is featured, along with a brief explanation written by a professional astronomer." name="twitter:description" />
             <meta content="https://apod.bradlove.dev/icons/icon-192x192.png" name="twitter:image" />
+            { /* OG */ }
             <meta content="website" property="og:type" />
-            <meta content="Astronomy Picture of the Day" property="og:title" />
-            {/* eslint-disable-next-line max-len -- description */}
-            <meta content="Each day a different image or photograph of our fascinating universe is featured, along with a brief explanation written by a professional astronomer." property="og:description" />
             <meta content="Astronomy Picture of the Day" property="og:site_name" />
-            <meta content="https://apod.bradlove.dev/" property="og:url" />
-            <meta content="https://apod.bradlove.dev/icons/icon-192x192.png" property="og:image" />
         </Head>
         <Navigation />
         <Component { ...pageProps } />
