@@ -60,7 +60,7 @@ export const NavigationActions: React.ComponentType<NavigationActionsProps> = ({
                     ].filter(Boolean).join(" ") }
                 />
             </button>
-            <Link href={ `/${ nextDate.toISODate() }` }>
+            <Link href={ `/${ nextDate.toISODate() }` } prefetch={ !(nextDate > maxDate) }>
                 <button
                     aria-disabled={ nextDate > maxDate || loading }
                     aria-label={ "Tomorrow's astronomy image" }
