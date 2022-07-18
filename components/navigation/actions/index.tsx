@@ -1,5 +1,6 @@
 
 import React from "react";
+import Link from "next/link";
 
 import useStore from "../../../store";
 import {
@@ -8,16 +9,12 @@ import {
 } from "../../../icons";
 
 export interface NavigationActionsProps{
-    handlePreviousDate: () => void;
-    handleNextDate: () => void;
     handleModalToggle: () => void;
     loading: boolean;
 }
 
 export const NavigationActions: React.ComponentType<NavigationActionsProps> = ({
-    handlePreviousDate,
     handleModalToggle,
-    handleNextDate,
     loading
 }) => {
 
@@ -29,16 +26,17 @@ export const NavigationActions: React.ComponentType<NavigationActionsProps> = ({
 
     return (
         <div className="btn-group flex">
-            <button
-                aria-disabled={ nextDate > maxDate || loading }
-                aria-label="Yesterday's astronomy image"
-                className="btn btn-square"
-                disabled={ previousDate < minDate || loading }
-                onClick={ handlePreviousDate }
-                type="button"
-            >
-                <ArrowLeftIcon />
-            </button>
+            <Link href={ `/${ previousDate.toISODate() }` }>
+                <button
+                    aria-disabled={ nextDate > maxDate || loading }
+                    aria-label="Yesterday's astronomy image"
+                    className="btn btn-square"
+                    disabled={ previousDate < minDate || loading }
+                    type="button"
+                >
+                    <ArrowLeftIcon />
+                </button>
+            </Link>
             <button
                 aria-label={ "Open calendar to select new date" }
                 className="btn modal-button relative overflow-hidden"
@@ -62,16 +60,17 @@ export const NavigationActions: React.ComponentType<NavigationActionsProps> = ({
                     ].filter(Boolean).join(" ") }
                 />
             </button>
-            <button
-                aria-disabled={ nextDate > maxDate || loading }
-                aria-label={ "Tomorrow's astronomy image" }
-                className="btn btn-square"
-                disabled={ nextDate > maxDate || loading }
-                onClick={ handleNextDate }
-                type="button"
-            >
-                <ArrowRightIcon />
-            </button>
+            <Link href={ `/${ nextDate.toISODate() }` }>
+                <button
+                    aria-disabled={ nextDate > maxDate || loading }
+                    aria-label={ "Tomorrow's astronomy image" }
+                    className="btn btn-square"
+                    disabled={ nextDate > maxDate || loading }
+                    type="button"
+                >
+                    <ArrowRightIcon />
+                </button>
+            </Link>
         </div>
     );
 };

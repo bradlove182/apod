@@ -7,10 +7,8 @@ import React, {
 } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { DateTime } from "luxon";
 
 import { Calendar } from "../calendar";
-import useStore from "../../store";
 import {
     ApodIcon,
     InfoIcon
@@ -24,9 +22,6 @@ export const Navigation: React.ComponentType = () => {
     const modalToggle = useRef<HTMLInputElement>(null);
     const infoToggle = useRef<HTMLInputElement>(null);
     const [loading, setLoading] = useState<boolean>(false);
-    const nextDate = useStore((state) => state.nextDate);
-    const previousDate = useStore((state) => state.previousDate);
-    const setDate = useStore((state) => state.setDate);
     const router = useRouter();
 
     const handleModalToggle = useCallback(() => {
@@ -48,30 +43,6 @@ export const Navigation: React.ComponentType = () => {
         }
 
     }, []);
-
-    const handleNextDate = useCallback(() => {
-
-        setDate(DateTime.fromISO(nextDate.toISODate()).toJSDate());
-
-        void router.push(`/${ nextDate.toISODate() }`);
-
-    }, [
-        nextDate,
-        router,
-        setDate
-    ]);
-
-    const handlePreviousDate = useCallback(() => {
-
-        setDate(DateTime.fromISO(previousDate.toISODate()).toJSDate());
-
-        void router.push(`/${ previousDate.toISODate() }`);
-
-    }, [
-        previousDate,
-        router,
-        setDate
-    ]);
 
     const handleRouteChange = useCallback(() => {
 
@@ -127,8 +98,6 @@ export const Navigation: React.ComponentType = () => {
                     <div className="navbar-center">
                         <NavigationActions
                             handleModalToggle={ handleModalToggle }
-                            handleNextDate={ handleNextDate }
-                            handlePreviousDate={ handlePreviousDate }
                             loading={ loading }
                         />
                     </div>

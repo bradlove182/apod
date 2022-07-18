@@ -22,27 +22,20 @@ export const Calendar: React.ComponentType = () => {
     const [
         currentDate,
         minDate,
-        maxDate,
-        setDate
+        maxDate
     ] = useStore((state) => [
         state.currentDate,
         state.minDate,
-        state.maxDate,
-        state.setDate
+        state.maxDate
     ], shallow);
 
     const handleOnClick = useCallback((date: Date) => {
 
         const pathDate = DateTime.fromJSDate(date).toISODate();
 
-        setDate(date);
-
         void router.push(`/${ pathDate }`);
 
-    }, [
-        router,
-        setDate
-    ]);
+    }, [router]);
 
     return (
         <Calander

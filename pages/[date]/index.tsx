@@ -33,13 +33,13 @@ export const PicturePage: NextPage<PicturePageProps> = ({
 
     useEffect(() => {
 
-        if(!router.isFallback){
-
-            setDate(DateTime.fromISO(picture.date).toJSDate());
-
+        if(router.isFallback){
+            return;
         }
 
-    }, [router.isFallback]);
+        setDate(DateTime.fromISO(picture.date).toJSDate());
+
+    }, [router.isFallback, picture]);
 
     if(router.isFallback){
         return (
