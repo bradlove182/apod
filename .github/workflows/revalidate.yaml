@@ -1,0 +1,14 @@
+
+name: Home-Revalidate
+on:
+  schedule:
+    - cron: '0 3 * * *'
+jobs:
+  cron:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call revalidate API
+        run: |
+          curl --request POST \
+          --url 'https://apod.bradlove.dev/api/revalidate' \
+          --header 'Authorization: Bearer ${{ secrets.APOD_REVALIDATE }}'
