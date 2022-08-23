@@ -3,29 +3,27 @@ import type {
     NextApiResponse
 } from "next";
 
-type Response = "Error revalidating" | { revalidated: boolean };
+type Response = Partial<{
+    message: "Error Revalidating" | "Invalid Token";
+    revalidated: boolean;
+}>;
 
 export default async function handler(request: NextApiRequest, response: NextApiResponse<Response>): Promise<void>{
-    if(request.method === "POST"){
 
-        try{
-            const { authorization } = request.headers;
+    if(request.query.secret !== process.env.APOD_REVALIDATE){
+        response.status(401).json({ message: "Invalid Token" });
+        return;
+    }
 
-            if(authorization === `Bearer ${ process.env.APOD_REVALIDATE! }`){
-                await response.revalidate("/");
-                response.status(200).json({ revalidated: true });
-            }
+    try{
 
-        }catch{
+        await response.revalidate("/");
+        response.status(200).json({ revalidated: true });
+        return;
 
-            response.status(500).send("Error revalidating");
+    }catch{
 
-        }
-
-    }else{
-
-        response.setHeader("Allow", "POST");
-        response.status(405).end("Method Not Allowed");
+        response.status(500).json({ message: "Error Revalidating" });
 
     }
 }

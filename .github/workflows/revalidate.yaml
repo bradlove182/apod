@@ -8,7 +8,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Call revalidate API
-        run: |
-          curl --request POST \
-          --url 'https://apod.bradlove.dev/api/revalidate' \
-          --header 'Authorization: Bearer ${{ secrets.APOD_REVALIDATE }}'
+        run: curl --request POST --url 'https://apod.bradlove.dev/api/revalidate?secret=${{ secrets.APOD_REVALIDATE }}'
