@@ -3,7 +3,10 @@ import create from "zustand";
 import { subscribeWithSelector } from "zustand/middleware";
 import { DateTime } from "luxon";
 
+import type { Modals } from "../components/modal";
+
 interface AppState{
+    modal: Modals;
     loading: boolean;
     previousDate: DateTime;
     currentDate: DateTime;
@@ -12,6 +15,7 @@ interface AppState{
     maxDate: DateTime;
     setDate: (date: Date) => void;
     setLoading: (loading: boolean) => void;
+    setModal: (modal: Modals) => void;
 }
 
 const useStore = create<AppState>()(
@@ -20,6 +24,7 @@ const useStore = create<AppState>()(
         loading: false,
         maxDate: DateTime.fromISO(DateTime.utc().toISODate()),
         minDate: DateTime.utc(1995, 6, 16),
+        modal: undefined,
         nextDate: DateTime.fromISO(DateTime.utc().toISODate()).plus({ day: 1 }),
         previousDate: DateTime.fromISO(DateTime.utc().toISODate()).minus({ day: 1 }),
         setDate: (date: Date): void => {
@@ -35,6 +40,11 @@ const useStore = create<AppState>()(
         setLoading: (loading): void => {
             set(() => ({
                 loading
+            }));
+        },
+        setModal: (modal: Modals): void => {
+            set(() => ({
+                modal
             }));
         }
     }))

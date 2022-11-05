@@ -7,7 +7,7 @@ const Offline = (): JSX.Element => (
     <React.Fragment>
         <Head>
             <title>
-                { "404 - Page Not Found" }
+                { "You're unfortunately offline. Please reconnect to continue." }
             </title>
         </Head>
         <div className="fixed inset-0 flex justify-center content-center">

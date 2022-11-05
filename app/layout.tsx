@@ -1,18 +1,17 @@
 import React from "react";
-import Head from "next/head";
+
+import { Navigation } from "../components/navigation";
+import { Modal } from "../components/modal";
 
 import "../styles/globals.css";
 
-import { Navigation } from "../components/navigation";
+interface RootLayoutProps{
+    children: React.ReactNode;
+}
 
-import type { AppProps } from "next/app";
-
-const MyApp = ({
-    Component,
-    pageProps
-}: AppProps): React.ReactElement => (
-    <div className="grid">
-        <Head>
+const RootLayout = ({ children }: RootLayoutProps): React.ReactElement => (
+    <html data-theme="dracula" lang="en">
+        <head>
             <title>
                 { "Astronomy Picture of the Day" }
             </title>
@@ -50,10 +49,12 @@ const MyApp = ({
             { /* OG */ }
             <meta content="website" property="og:type" />
             <meta content="Astronomy Picture of the Day" property="og:site_name" />
-        </Head>
-        <Navigation />
-        <Component { ...pageProps } />
-    </div>
+        </head>
+        <body>
+            <Navigation />
+            { children }
+            <Modal />
+        </body>
+    </html>
 );
-
-export default MyApp;
+export default RootLayout;

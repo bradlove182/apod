@@ -1,9 +1,14 @@
 
+"use client";
+
 import React, {
     useEffect,
     useRef,
     useState
 } from "react";
+import { DateTime } from "luxon";
+
+import useStore from "../../store";
 
 import { PictureActions } from "./actions";
 
@@ -35,8 +40,14 @@ export const PictureOfTheDay: React.ComponentType<PictureOfTheDayProps> = ({
     const frame = useRef<HTMLIFrameElement>(null);
     const image = useRef<HTMLImageElement>(null);
     const [loading, setLoading] = useState<boolean>(true);
+    const setDate = useStore((state) => state.setDate);
 
     useEffect(() => {
+
+        // Temporary until Nextjs fixes head.tsx replacing title
+        document.title = `${ picture.title } | Astronomy Picture of the Day`;
+
+        setDate(DateTime.fromISO(picture.date).toJSDate());
 
         const currentFrame = frame.current;
 
