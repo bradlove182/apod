@@ -1,9 +1,0 @@
-{
-    "extends": ["next/core-web-vitals", "next", "@newsteam"],
-    "rules": {
-        "@typescript-eslint/no-magic-numbers":"off",
-        "id-length":"off",
-        "postcss-modules/no-unused-class": "off",
-        "@next/next/no-img-element": 0
-    }
-  }

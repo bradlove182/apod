@@ -5,13 +5,14 @@ import React, {
     useCallback,
     useEffect
 } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 import useStore from "../../../store";
 import {
     ArrowLeftIcon,
     ArrowRightIcon
 } from "../../../icons";
+import { DateTime } from "luxon";
 
 export interface NavigationActionsProps{
     loading: boolean;
@@ -22,6 +23,7 @@ export const NavigationActions: React.ComponentType<NavigationActionsProps> = ({
 }) => {
 
     const router = useRouter();
+    const pathName = usePathname();
     const currentDate = useStore((state) => state.currentDate);
     const nextDate = useStore((state) => state.nextDate);
     const previousDate = useStore((state) => state.previousDate);
@@ -86,20 +88,6 @@ export const NavigationActions: React.ComponentType<NavigationActionsProps> = ({
                 type="button"
             >
                 { currentDate.toISODate() }
-                <progress
-                    className={ [
-                        "progress",
-                        "h-0.5",
-                        "progress-primary",
-                        "w-100",
-                        "absolute",
-                        "bottom-0",
-                        "left-0",
-                        "right-0",
-                        "rounded-none",
-                        loading ? "visible" : "hidden"
-                    ].filter(Boolean).join(" ") }
-                />
             </button>
             <button
                 aria-disabled={ nextDate > maxDate || loading }

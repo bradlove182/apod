@@ -6,13 +6,12 @@ import React, {
     useRef,
     useState
 } from "react";
-import { DateTime } from "luxon";
-
 import useStore from "../../store";
 
 import { PictureActions } from "./actions";
 
 import type { Picture } from "../../data/api/picture/types";
+import { DateTime } from "luxon";
 
 const calculateDimensions = (width: number, height: number): number => {
 
@@ -43,11 +42,10 @@ export const PictureOfTheDay: React.ComponentType<PictureOfTheDayProps> = ({
     const setDate = useStore((state) => state.setDate);
 
     useEffect(() => {
+        setDate(DateTime.fromISO(picture.date).toJSDate())
+    }, [picture.date])
 
-        // Temporary until Nextjs fixes head.tsx replacing title
-        document.title = `${ picture.title } | Astronomy Picture of the Day`;
-
-        setDate(DateTime.fromISO(picture.date).toJSDate());
+    useEffect(() => {
 
         const currentFrame = frame.current;
 
@@ -98,7 +96,7 @@ export const PictureOfTheDay: React.ComponentType<PictureOfTheDayProps> = ({
         <div className="grid auto-rows-min">
             <div
                 className={ [
-                    "relative bg-base-300 flex align-center justify-center relative overflow-hidden",
+                    "relative bg-base-300 flex align-center justify-center overflow-hidden",
                     loading ? "bg-gradient-to-r from-base-300 via-neutral to-base-300 background-animate" : ""
                 ].filter(Boolean).join(" ") }
                 style={ {

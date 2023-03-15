@@ -10,7 +10,6 @@ export const PictureOfTheDayFallback: React.ComponentType = () => (
                     flex
                     align-center
                     justify-center
-                    relative
                     overflow-hidden
                     bg-gradient-to-r
                     from-base-300

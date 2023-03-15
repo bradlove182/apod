@@ -2,7 +2,7 @@
 import { DateTime } from "luxon";
 import React, { useCallback } from "react";
 import Calander from "react-calendar";
-import shallow from "zustand/shallow";
+import { shallow } from "zustand/shallow";
 import { useRouter } from "next/navigation";
 
 import useStore from "../../store";
@@ -29,6 +29,7 @@ export const Calendar: React.ComponentType = () => {
         state.maxDate
     ], shallow);
     const setModal = useStore((state) => state.setModal);
+    const setCurrentDate = useStore((state) => state.setDate);
 
     const handleOnClick = useCallback((date: Date) => {
 
@@ -36,6 +37,7 @@ export const Calendar: React.ComponentType = () => {
 
         setModal(undefined);
 
+        setCurrentDate(date);
         router.push(`/${ pathDate }`);
 
     }, []);
