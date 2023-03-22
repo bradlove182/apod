@@ -3,12 +3,17 @@ import React from "react";
 import { getPicture } from "../../data/api/picture";
 import { PictureOfTheDay } from "../../components/picture";
 import { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 const generateMetadata = async ({ params }: { params: { date: string } }): Promise<Metadata> => {
 
     const picture = await getPicture({
         date: params.date
     });
+
+    if(!picture.title){
+        return {}
+    }
 
     return {
         title: picture.title,
@@ -34,6 +39,10 @@ const Page = async ({ params }: { params: { date: string } }): Promise<React.Rea
     const picture = await getPicture({
         date: params.date
     });
+
+    if(!picture.title){
+        notFound();
+    }
 
     return (
         <PictureOfTheDay picture={ picture } />

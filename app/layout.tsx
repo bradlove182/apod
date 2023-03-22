@@ -41,7 +41,16 @@ const metadata: Metadata = {
     },
     themeColor: "#272935",
     manifest: "/manifest.json",
-    colorScheme: "dark"
+    colorScheme: "dark",
+    icons: {
+        icon: "/favicon.png",
+        apple: [
+            {
+                url: "/icons/icon-192x192.png",
+                sizes: "192"
+            }
+        ]
+    }
 }
 
 const RootLayout = ({ children }: RootLayoutProps): React.ReactElement => (

@@ -5,12 +5,17 @@ import { DateTime } from "luxon";
 import { getPicture } from "../data/api/picture";
 import { PictureOfTheDay } from "../components/picture";
 import { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 const generateMetadata = async (): Promise<Metadata> => {
 
     const picture = await getPicture({
         date: DateTime.utc().toISODate()
     });
+
+    if(!picture.title){
+        return {}
+    }
 
     return {
         title: picture.title,
@@ -36,6 +41,10 @@ const Page = async (): Promise<React.ReactElement> => {
     const picture = await getPicture({
         date: DateTime.utc().toISODate()
     });
+
+    if(!picture){
+        notFound();
+    }
 
     return (
         <PictureOfTheDay picture={ picture } />

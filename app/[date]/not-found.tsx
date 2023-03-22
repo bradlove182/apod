@@ -1,15 +1,9 @@
 
 import Link from "next/link";
 import React from "react";
-import Head from "next/head";
 
 const NotFound = (): JSX.Element => (
     <React.Fragment>
-        <Head>
-            <title>
-                { "404 - Page Not Found" }
-            </title>
-        </Head>
         <div className="fixed inset-0 flex justify-center content-center">
             <div className="grid grid-rows-3 gap-4 h-min self-center prose text-primary">
                 <svg
@@ -32,10 +26,8 @@ const NotFound = (): JSX.Element => (
                 <h1 className="text-center">
                     { "404 - Page Not Found" }
                 </h1>
-                <Link href="/">
-                    <button className="btn" type="button">
-                        { "Home" }
-                    </button>
+                <Link href="/" className="btn">
+                    { "Home" }
                 </Link>
             </div>
         </div>
