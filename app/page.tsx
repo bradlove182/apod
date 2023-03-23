@@ -1,4 +1,3 @@
-
 import React from "react";
 import { DateTime } from "luxon";
 
@@ -8,13 +7,12 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 const generateMetadata = async (): Promise<Metadata> => {
-
     const picture = await getPicture({
-        date: DateTime.utc().toISODate()
+        date: DateTime.utc().toISODate(),
     });
 
-    if(!picture.title){
-        return {}
+    if (!picture.title) {
+        return {};
     }
 
     return {
@@ -23,33 +21,28 @@ const generateMetadata = async (): Promise<Metadata> => {
         openGraph: {
             title: picture.title,
             images: picture.url,
-            description: picture.explanation
+            description: picture.explanation,
         },
         twitter: {
             card: "summary",
             title: picture.title,
-            images: "https://apod.bradlove.dev/icons/icon-192x192.png",
+            images: picture.url,
             site: "https://apod.bradlove.dev/",
-            description: picture.explanation
+            description: picture.explanation,
         },
-    }
-
+    };
 };
 
 const Page = async (): Promise<React.ReactElement> => {
-
     const picture = await getPicture({
-        date: DateTime.utc().toISODate()
+        date: DateTime.utc().toISODate(),
     });
 
-    if(!picture){
+    if (!picture) {
         notFound();
     }
 
-    return (
-        <PictureOfTheDay picture={ picture } />
-    );
-
+    return <PictureOfTheDay picture={picture} />;
 };
 
 export { generateMetadata };

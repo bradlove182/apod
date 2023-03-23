@@ -1,15 +1,8 @@
-
 import Link from "next/link";
 import React from "react";
-import Head from "next/head";
 
 const Offline = (): JSX.Element => (
     <React.Fragment>
-        <Head>
-            <title>
-                { "You're unfortunately offline. Please reconnect to continue." }
-            </title>
-        </Head>
         <div className="fixed inset-0 flex justify-center content-center">
             <div className="grid grid-rows-3 gap-4 h-min self-center prose text-primary">
                 <svg
@@ -30,12 +23,12 @@ const Offline = (): JSX.Element => (
                     <line x1="15" x2="15.01" y1="9" y2="9" />
                 </svg>
                 <h1 className="text-center">
-                    { "You're unfortunately offline. Please reconnect to continue." }
+                    {
+                        "You're unfortunately offline. Please reconnect to continue."
+                    }
                 </h1>
-                <Link href="/">
-                    <button className="btn" type="button">
-                        { "Home" }
-                    </button>
+                <Link href="/" className="btn">
+                    {"Home"}
                 </Link>
             </div>
         </div>
