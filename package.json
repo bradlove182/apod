@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@ducanh2912/next-pwa": "^8.1.1",
+    "@vercel/analytics": "^1.0.2",
     "change-case": "^4.1.2",
     "daisyui": "^2.51.4",
     "framer-motion": "^10.3.2",

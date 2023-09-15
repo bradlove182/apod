@@ -1,4 +1,5 @@
 import React from "react";
+import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
 
 import { Navigation } from "../components/navigation";
@@ -6,12 +7,13 @@ import { Modal } from "../components/modal";
 
 import "../styles/globals.css";
 
-interface RootLayoutProps{
+interface RootLayoutProps {
     children: React.ReactNode;
 }
 
 const appTitle = "Astronomy Picture of the Day";
-const appDescription = "Each day a different image or photograph of our fascinating universe is featured, along with a brief explanation written by a professional astronomer.";
+const appDescription =
+    "Each day a different image or photograph of our fascinating universe is featured, along with a brief explanation written by a professional astronomer.";
 const appUrl = "https://apod.bradlove.dev";
 
 const metadata: Metadata = {
@@ -21,23 +23,23 @@ const metadata: Metadata = {
         title: appTitle,
         url: appUrl,
         type: "website",
-        siteName: appTitle
+        siteName: appTitle,
     },
     twitter: {
         card: "summary",
         title: appTitle,
         images: "https://apod.bradlove.dev/icons/icon-192x192.png",
         site: appUrl,
-        description: appDescription
+        description: appDescription,
     },
     applicationName: appTitle,
     appleWebApp: {
         title: appTitle,
         capable: true,
-        statusBarStyle: "default"
+        statusBarStyle: "default",
     },
     robots: {
-        index: true
+        index: true,
     },
     themeColor: "#272935",
     manifest: "/manifest.json",
@@ -47,18 +49,19 @@ const metadata: Metadata = {
         apple: [
             {
                 url: "/icons/icon-192x192.png",
-                sizes: "192"
-            }
-        ]
-    }
-}
+                sizes: "192",
+            },
+        ],
+    },
+};
 
 const RootLayout = ({ children }: RootLayoutProps): React.ReactElement => (
     <html data-theme="dracula" lang="en">
         <body>
             <Navigation />
-            { children }
+            {children}
             <Modal />
+            <Analytics />
         </body>
     </html>
 );
