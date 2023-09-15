@@ -35,7 +35,7 @@ const generateMetadata = async (): Promise<Metadata> => {
 
 const Page = async (): Promise<React.ReactElement> => {
     const picture = await getPicture({
-        date: DateTime.utc().toISODate(),
+        date: DateTime.utc().toISODate()!,
     });
 
     if (!picture) {
